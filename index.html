@@ -20,6 +20,7 @@
             min-height: 100vh;
             padding: 20px;
             box-sizing: border-box;
+            position: relative;
         }
 
         @keyframes gradientBG {
@@ -184,6 +185,16 @@
             .task .priority {
                 font-size: 0.7rem;
             }
+
+            .doodle {
+                position: relative;
+                margin: 10px auto;
+                display: block;
+                top: auto;
+                left: auto;
+                right: auto;
+                bottom: auto;
+            }
         }
 
         @media (max-width: 480px) {
@@ -200,6 +211,11 @@
 
             .add-task .top-row {
                 flex-direction: column;
+            }
+
+            .doodle {
+                width: 50px;
+                height: 50px;
             }
         }
     </style>
@@ -222,12 +238,12 @@
         <div id="task-list"></div>
     </div>
 
-        <!-- Professional Doodles -->
+    <!-- Professional Doodles -->
     <div id="doodle-container">
-        <img src="https://cdn-icons-png.flaticon.com/512/2784/2784461.png" alt="Checklist Doodle" class="doodle" style="top: 10%; left: 10%;">
-        <img src="https://cdn-icons-png.flaticon.com/512/3050/3050243.png" alt="Calendar Doodle" class="doodle" style="top: 20%; right: 15%;">
-        <img src="https://cdn-icons-png.flaticon.com/512/2885/2885710.png" alt="Clock Doodle" class="doodle" style="bottom: 10%; left: 20%;">
-        <img src="https://cdn-icons-png.flaticon.com/512/2777/2777629.png" alt="Lightbulb Doodle" class="doodle" style="bottom: 15%; right: 10%;">
+        <img src="https://cdn-icons-png.flaticon.com/512/2784/2784461.png" alt="Checklist Doodle" class="doodle">
+        <img src="https://cdn-icons-png.flaticon.com/512/3050/3050243.png" alt="Calendar Doodle" class="doodle">
+        <img src="https://cdn-icons-png.flaticon.com/512/2885/2885710.png" alt="Clock Doodle" class="doodle">
+        <img src="https://cdn-icons-png.flaticon.com/512/2777/2777629.png" alt="Lightbulb Doodle" class="doodle">
     </div>
 
     <script>
@@ -295,19 +311,11 @@
 
     function changeDoodles() {
         doodleContainer.innerHTML = '';
-        doodles.sort(() => Math.random() - 0.5).slice(0, 4).forEach((doodle, index) => {
+        doodles.sort(() => Math.random() - 0.5).slice(0, 4).forEach(() => {
             const img = document.createElement('img');
             img.src = doodle[0];
             img.alt = doodle[1];
             img.className = 'doodle';
-
-            // Random position logic
-            img.style.position = 'absolute';
-            img.style.top = `${10 + index * 10}%`;
-            img.style.left = index % 2 === 0 ? `${10 + index * 5}%` : 'auto';
-            img.style.right = index % 2 === 1 ? `${15 - index * 5}%` : 'auto';
-            img.style.bottom = index % 2 === 0 ? `${10 + index * 5}%` : 'auto';
-
             doodleContainer.appendChild(img);
         });
     }
@@ -315,8 +323,7 @@
     // Set doodle rotation interval
     setInterval(changeDoodles, 60000); // Change doodles every minute
     changeDoodles();
-</script>
+    </script>
 
 </body>
 </html>
-
